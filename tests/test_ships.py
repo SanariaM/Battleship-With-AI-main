@@ -1,9 +1,13 @@
+"""Tests for fleet definitions and placement order helpers."""
+
 import unittest
 
 from game.ships import get_classic_fleet, get_placement_fleet
 
 
 class PlacementFleetTests(unittest.TestCase):
+    """Keep ship metadata and placement order easy to trust."""
+
     def test_classic_fleet_keeps_standard_order(self):
         fleet = get_classic_fleet(5)
 

@@ -1,9 +1,13 @@
+"""Rule tests for hits, misses, area shots, and sinking logic."""
+
 import unittest
 
 from game.rules import HIT, MISS, UNKNOWN, fire_area_shot, fire_shot, ships_remaining, sunk_ship_cells
 
 
 class FireShotTests(unittest.TestCase):
+    """Cover the main outcomes for direct and special attacks."""
+
     def test_fire_shot_marks_miss(self):
         shots = [[UNKNOWN] * 10 for _ in range(10)]
         incoming = [[UNKNOWN] * 10 for _ in range(10)]
@@ -93,6 +97,8 @@ class FireAreaShotTests(unittest.TestCase):
 
 
 class ShipsRemainingTests(unittest.TestCase):
+    """Track endgame helpers that depend on hit state."""
+
     def test_ships_remaining_counts_only_unsunk_ships(self):
         ships = [[(0, 0)], [(1, 1), (1, 2)], [(5, 5)]]
         hits = {(0, 0), (1, 1)}

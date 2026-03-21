@@ -1,3 +1,5 @@
+"""Board-level tests for random fleet generation."""
+
 import random
 import unittest
 
@@ -5,6 +7,8 @@ from game.board import GRID_SIZE, generate_random_fleet
 
 
 class GenerateRandomFleetTests(unittest.TestCase):
+    """Verify generated fleets match the expected Battleship rules."""
+
     def test_generate_random_fleet_places_expected_ship_lengths_without_overlap(self):
         board, ships = generate_random_fleet(5, rng=random.Random(123))
 

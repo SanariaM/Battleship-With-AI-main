@@ -1,9 +1,13 @@
+"""Game state reset tests for starting a fresh match cleanly."""
+
 import unittest
 
 from app.app_models import GameState
 
 
 class GameStateResetTests(unittest.TestCase):
+    """Make sure reset clears live match data back to defaults."""
+
     def test_reset_for_new_game_restores_default_battle_state(self):
         state = GameState()
         state.num_ships = 4
