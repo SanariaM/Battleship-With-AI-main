@@ -686,6 +686,7 @@ class PlacementScreen(tk.Frame):  # Screen 2: both players place ships before ba
         panel_width = panel.winfo_width()
 
         if panel_height > 1 and panel_width > 1:
+            # Size from the active board panel so all 10 rows can stay visible on short screens.
             title_height = title_widget.winfo_height() + hint_widget.winfo_height()
             usable_height = max(180, panel_height - title_height - 28)
             usable_width = max(180, panel_width - 80)
@@ -749,6 +750,7 @@ class PlacementScreen(tk.Frame):  # Screen 2: both players place ships before ba
             self.ready_btn.config(width=10)
 
     def _fleet_specs(self):
+        """Return the placement order shown in the strip: largest classic ships first."""
         s = self.app.state
         if s.num_ships is None:
             return []
@@ -785,6 +787,7 @@ class PlacementScreen(tk.Frame):  # Screen 2: both players place ships before ba
         placed_counts = Counter(len(ship) for ship in self._ships_list_for_player(player))
         required_counts = Counter()
         width = self.winfo_width()
+        # Keep the examples horizontal; only the live grid preview rotates with direction.
         if width >= 1180:
             columns = len(fleet)
         elif width >= 980:
@@ -1307,11 +1310,13 @@ class PlacementScreen(tk.Frame):  # Screen 2: both players place ships before ba
             return
 
         player, painted = self._preview_state
+        # Reset only the cells touched by the hover preview so moving the mouse does not flicker.
         for row, col in painted:
             self._reset_preview_cell(player, row, col)
         self._preview_state = None
 
     def _paint_preview_overlay(self, player: int):
+        # Paint a temporary candidate ship without rebuilding the whole board UI.
         board = self._board_for_player(player)
         cells = self.p1_buttons if player == 1 else self.p2_buttons
         self._render_placement_preview(player=player, cells=cells, board=board, active=True)
@@ -1625,6 +1630,7 @@ class BattleScreen(tk.Frame):
     def _apply_battle_cell_size(self):
         width = self.winfo_width()
         height = self.winfo_height()
+        # Battle prioritizes keeping both boards visible before showing larger cells.
         if width < 920 or height < 700:
             cell_size = 20
         elif width < 1240 or height < 860:

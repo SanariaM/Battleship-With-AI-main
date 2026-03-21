@@ -171,6 +171,7 @@ class App(tk.Tk):  # Main application window inherits from Tk
         self.geometry(f"{width}x{height}+{x}+{y}")
 
     def _preset_window_size(self, preset_name: str) -> tuple[int, int]:
+        """Translate a named preset into a centered window size that fits the monitor."""
         preset = WINDOW_PRESETS[preset_name]
         screen_w = max(820, self.winfo_screenwidth() - 80)
         screen_h = max(620, self.winfo_screenheight() - 120)
@@ -181,6 +182,7 @@ class App(tk.Tk):  # Main application window inherits from Tk
         return width, height
 
     def set_window_preset(self, preset_name: str):
+        """Apply a preset and then let each screen recompute its own responsive layout."""
         if preset_name not in WINDOW_PRESETS:
             return
 

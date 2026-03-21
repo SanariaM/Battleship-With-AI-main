@@ -160,6 +160,7 @@ def ship_hit_counters(ships_list, hits_set):
     return counters
 
 def ship_hit_counters_sorted(ships_list, hits_set):
+    """Return hit counters ordered from the shortest ship to the longest ship."""
     ships_sorted = sorted(ships_list, key=len)
     return ship_hit_counters(ships_sorted, hits_set)
 
@@ -173,4 +174,3 @@ def sunk_ship_cells(defender_ships: List[List[Coord]], defender_hits: Set[Coord]
         if all(coord in defender_hits for coord in ship):
             sunk.update(ship)
     return sunk
-

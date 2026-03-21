@@ -57,6 +57,7 @@ def get_classic_fleet(num_ships: int) -> List[ShipSpec]:
 
 
 def get_classic_lengths(num_ships: int) -> List[int]:
+    """Convenience helper for code paths that only need the classic ship lengths."""
     return [ship.length for ship in get_classic_fleet(num_ships)]
 
 
